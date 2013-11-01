@@ -64,13 +64,69 @@ node[:deploy].each do |app_name, deploy|
     level :info
   end
 
+  #TODO refine this
   directory "#{deploy[:deploy_to]}/current/app/tmp" do
+    group deploy[:group]
     if platform?("ubuntu")
       owner "www-data"
-      group "www-data"
     elsif platform?("amazon")
       owner "apache"
-      group "apache"
+    end
+    mode 0777
+    action :create
+  end
+
+  directory "#{deploy[:deploy_to]}/current/app/tmp/logs" do
+    group deploy[:group]
+    if platform?("ubuntu")
+      owner "www-data"
+    elsif platform?("amazon")
+      owner "apache"
+    end
+    mode 0777
+    action :create
+  end
+
+
+  directory "#{deploy[:deploy_to]}/current/app/tmp/cache" do
+    group deploy[:group]
+    if platform?("ubuntu")
+      owner "www-data"
+    elsif platform?("amazon")
+      owner "apache"
+    end
+    mode 0777
+    action :create
+  end
+
+  directory "#{deploy[:deploy_to]}/current/app/tmp/cache/models" do
+    group deploy[:group]
+    if platform?("ubuntu")
+      owner "www-data"
+    elsif platform?("amazon")
+      owner "apache"
+    end
+    mode 0777
+    action :create
+  end
+
+  directory "#{deploy[:deploy_to]}/current/app/tmp/cache/persistent" do
+    group deploy[:group]
+    if platform?("ubuntu")
+      owner "www-data"
+    elsif platform?("amazon")
+      owner "apache"
+    end
+    mode 0777
+    action :create
+  end
+
+  directory "#{deploy[:deploy_to]}/current/app/tmp/cache/views" do
+    group deploy[:group]
+    if platform?("ubuntu")
+      owner "www-data"
+    elsif platform?("amazon")
+      owner "apache"
     end
     mode 0777
     action :create

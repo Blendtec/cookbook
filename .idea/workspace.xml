@@ -58,7 +58,7 @@
       <file leaf-file-name="appsetup.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/residential/recipes/appsetup.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="63" selection-start="1204" selection-end="1204" vertical-scroll-proportion="0.64149225">
+            <state line="42" column="0" selection-start="1036" selection-end="1036" vertical-scroll-proportion="0.5732484">
               <folding />
             </state>
           </provider>
@@ -403,7 +403,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/residential/recipes/appsetup.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="63" selection-start="1204" selection-end="1204" vertical-scroll-proportion="0.64149225">
+        <state line="42" column="0" selection-start="1036" selection-end="1036" vertical-scroll-proportion="0.5732484">
           <folding />
         </state>
       </provider>

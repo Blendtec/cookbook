@@ -113,7 +113,11 @@ node[:deploy].each do |app_name, deploy|
         user 'apache'
       end
       action :run
-      returns 1
+      returns 0
+    end
+
+    only_if do
+      File.directory?("#{deploy[:deploy_to]}/current/app/Plugin/app/Config/Migration")
     end
   end
 
@@ -127,8 +131,13 @@ node[:deploy].each do |app_name, deploy|
       user 'apache'
     end
     action :run
-    returns 1
+    returns 0
+
+    only_if do
+      File.directory?("#{deploy[:deploy_to]}/current/app/Config/Migration")
+    end
   end
+
 end
 
 

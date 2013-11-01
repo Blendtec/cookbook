@@ -116,8 +116,9 @@ node[:deploy].each do |app_name, deploy|
       returns 0
     end
 
-    only_if do
-      File.directory?("#{deploy[:deploy_to]}/current/app/Plugin/#{item}/Config/Migration")
+    log "message" do
+      message "SEARCHING FOR #{deploy[:deploy_to]}/current/app/Plugin/#{item}/Config/Migration"
+      level :info
     end
   end
 
@@ -133,8 +134,9 @@ node[:deploy].each do |app_name, deploy|
     action :run
     returns 0
 
-    only_if do
-      File.directory?("#{deploy[:deploy_to]}/current/app/Config/Migration")
+    log "message" do
+      message "SEARCHING FOR #{deploy[:deploy_to]}/current/app/Config/Migration"
+      level :info
     end
   end
 

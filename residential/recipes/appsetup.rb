@@ -58,4 +58,35 @@ node[:deploy].each do |app_name, deploy|
       File.directory?("#{deploy[:deploy_to]}/current/app/Config")
     end
   end
+
+  log "message" do
+    message "SETUP: creating tmp directory"
+    level :info
+  end
+  directory "#{deploy[:deploy_to]}/current/app/tmp/cache" do
+    mode 0777
+    group deploy[:group]
+    if platform?("ubuntu")
+      owner "www-data"
+    elsif platform?("amazon")
+      owner "apache"
+    end
+    action :create
+    recursive true
+  end
+
+  %w{models persistent views}.each do |dir|
+    directory "#{deploy[:deploy_to]}/current/app/tmp/cache/#{dir}" do
+      mode 00777
+      group deploy[:group]
+      if platform?("ubuntu")
+        owner "www-data"
+      elsif platform?("amazon")
+        owner "apache"
+      end
+      action :create
+      recursive true
+    end
+  end
+
 end

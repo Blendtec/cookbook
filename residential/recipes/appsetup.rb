@@ -146,6 +146,7 @@ node[:deploy].each do |app_name, deploy|
     execute "cake migration" do
       cwd "#{deploy[:deploy_to]}/current/app"
       command "../lib/Cake/Console/cake"
+      returns 1 #temporary
       action :run
     end
   end

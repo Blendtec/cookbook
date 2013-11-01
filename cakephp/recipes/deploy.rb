@@ -102,11 +102,7 @@ node[:deploy].each do |app_name, deploy|
   end
 
   Dir.foreach("#{deploy[:deploy_to]}/current/app/Plugin") do |item|
-    next if item == '.' or item == '..'
-    log "message" do
-      message "SEARCHING FOR #{deploy[:deploy_to]}/current/app/Plugin/#{item}/Config/Migration"
-      level :info
-    end
+    next if item == '.' or item == '..'  or Dir["#{deploy[:deploy_to]}/current/app/Plugin/#{item}/Config/Migration"].nil
     execute 'cake migration' do
       cwd "#{deploy[:deploy_to]}/current/app"
       command "../lib/Cake/Console/cake Migrations.migration run all --plugin #{item}"
@@ -120,20 +116,18 @@ node[:deploy].each do |app_name, deploy|
     end
   end
 
-  log "message" do
-    message "SEARCHING FOR #{deploy[:deploy_to]}/current/app/Config/Migration"
-    level :info
-  end
-  execute 'cake migration' do
-    cwd "#{deploy[:deploy_to]}/current/app"
-    command '../lib/Cake/Console/cake Migrations.migration run all'
-    if platform?('ubuntu')
-      user 'www-data'
-    elsif platform?('amazon')
-      user 'apache'
+  if File.directory?("#{deploy[:deploy_to]}/current/app/Config/migration")
+    execute 'cake migration' do
+      cwd "#{deploy[:deploy_to]}/current/app"
+      command '../lib/Cake/Console/cake Migrations.migration run all'
+      if platform?('ubuntu')
+        user 'www-data'
+      elsif platform?('amazon')
+        user 'apache'
+      end
+      action :run
+      returns 0
     end
-    action :run
-    returns 0
   end
 
 end

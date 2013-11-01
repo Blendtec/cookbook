@@ -126,6 +126,11 @@ node[:deploy].each do |app_name, deploy|
       message "APPSETUP: running migrations for #{item}"
       level :info
     end
+    execute "cake migration" do
+      cwd "#{deploy[:deploy_to]}/current/app"
+      command "../lib/Cake/Console/cake"
+      action :run
+    end
   end
 
 end

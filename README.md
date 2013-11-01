@@ -1,4 +1,4 @@
 cookbook
 ========
 
-cakphp chef recipes
+Chef recipes

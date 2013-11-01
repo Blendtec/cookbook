@@ -76,6 +76,17 @@ node[:deploy].each do |app_name, deploy|
     action :create
   end
 
+  directory "#{deploy[:deploy_to]}/current/app/tmp/cache" do
+    mode 0740
+    group deploy[:group]
+    if platform?('ubuntu')
+      owner 'www-data'
+    elsif platform?('amazon')
+      owner 'apache'
+    end
+    action :create
+  end
+
   %w{models persistent views}.each do |dir|
     directory "#{deploy[:deploy_to]}/current/app/tmp/cache/#{dir}" do
       mode 0740

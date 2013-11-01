@@ -1,3 +1,8 @@
+#
+# Cookbook Name:: cakephp
+# Recipe:: deploy
+#
+
 node[:deploy].each do |app_name, deploy|
 
   script "install_composer" do
@@ -96,16 +101,12 @@ node[:deploy].each do |app_name, deploy|
     end
   end
 
+
   Dir.foreach("#{deploy[:deploy_to]}/current/app/Plugin") do |item|
     next if item == '.' or item == '..'
-    log 'message' do
-      message "APPSETUP: running migrations for #{item}"
-      level :info
-    end
     execute 'cake migration' do
       cwd "#{deploy[:deploy_to]}/current/app"
-      command '../lib/Cake/Console/cake'
-      returns 1 #temporary
+      command "../lib/Cake/Console/cake Migrations.migration run all --plugin #{item}"
       if platform?('ubuntu')
         user 'www-data'
       elsif platform?('amazon')
@@ -114,4 +115,18 @@ node[:deploy].each do |app_name, deploy|
       action :run
     end
   end
+
+
+  execute 'cake migration' do
+    cwd "#{deploy[:deploy_to]}/current/app"
+    command '../lib/Cake/Console/cake Migrations.migration run all'
+    if platform?('ubuntu')
+      user 'www-data'
+    elsif platform?('amazon')
+      user 'apache'
+    end
+    action :run
+  end
 end
+
+

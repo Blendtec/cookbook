@@ -10,7 +10,7 @@ node[:deploy].each do |app_name, deploy|
     EOH
   end
 
-  template "#{deploy[:deploy_to]}/current/database.php" do
+  template "#{deploy[:deploy_to]}/current/app/Config/database.php" do
     source "database.php.erb"
     mode 0660
     group deploy[:group]
@@ -29,11 +29,11 @@ node[:deploy].each do |app_name, deploy|
     )
 
     only_if do
-      File.directory?("#{deploy[:deploy_to]}/current/database.php")
+      File.directory?("#{deploy[:deploy_to]}/current/app/Config/database.php")
     end
   end
 
-  template "#{deploy[:deploy_to]}/current/core.php" do
+  template "#{deploy[:deploy_to]}/current/app/Config/core.php" do
     source "core.php.erb"
     mode 0660
     group deploy[:group]
@@ -45,7 +45,7 @@ node[:deploy].each do |app_name, deploy|
     end
 
     only_if do
-      File.directory?("#{deploy[:deploy_to]}/current/core.php")
+      File.directory?("#{deploy[:deploy_to]}/current/app/Config/core.php")
     end
   end
 end

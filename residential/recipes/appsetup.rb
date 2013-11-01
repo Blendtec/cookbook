@@ -10,6 +10,11 @@ node[:deploy].each do |app_name, deploy|
     EOH
   end
 
+  log "message" do
+    message "SETUP: generating database.php"
+    level :info
+  end
+
   template "#{deploy[:deploy_to]}/current/app/Config/database.php" do
     source "database.php.erb"
     mode 0660
@@ -33,6 +38,11 @@ node[:deploy].each do |app_name, deploy|
     end
   end
 
+  log "message" do
+    message "SETUP: generating core.php"
+    level :info
+  end
+
   template "#{deploy[:deploy_to]}/current/app/Config/core.php" do
     source "core.php.erb"
     mode 0660
@@ -47,6 +57,11 @@ node[:deploy].each do |app_name, deploy|
     only_if do
       File.directory?("#{deploy[:deploy_to]}/current/app/Config")
     end
+  end
+
+  log "message" do
+    message "SETUP: creating tmp directory"
+    level :info
   end
 
   directory "#{deploy[:deploy_to]}/current/app/tmp" do

@@ -101,7 +101,10 @@ node[:deploy].each do |app_name, deploy|
     end
   end
 
-
+  log "message" do
+    message "SEARCHING FOR #{deploy[:deploy_to]}/current/app/Plugin/#{item}/Config/Migration"
+    level :info
+  end
   Dir.foreach("#{deploy[:deploy_to]}/current/app/Plugin") do |item|
     next if item == '.' or item == '..'
     execute 'cake migration' do
@@ -115,14 +118,12 @@ node[:deploy].each do |app_name, deploy|
       action :run
       returns 0
     end
-
-    log "message" do
-      message "SEARCHING FOR #{deploy[:deploy_to]}/current/app/Plugin/#{item}/Config/Migration"
-      level :info
-    end
   end
 
-
+  log "message" do
+    message "SEARCHING FOR #{deploy[:deploy_to]}/current/app/Config/Migration"
+    level :info
+  end
   execute 'cake migration' do
     cwd "#{deploy[:deploy_to]}/current/app"
     command '../lib/Cake/Console/cake Migrations.migration run all'
@@ -133,11 +134,6 @@ node[:deploy].each do |app_name, deploy|
     end
     action :run
     returns 0
-
-    log "message" do
-      message "SEARCHING FOR #{deploy[:deploy_to]}/current/app/Config/Migration"
-      level :info
-    end
   end
 
 end

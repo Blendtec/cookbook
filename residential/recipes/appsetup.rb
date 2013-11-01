@@ -11,7 +11,7 @@ node[:deploy].each do |app_name, deploy|
   end
 
   log "message" do
-    message "SETUP: generating database.php"
+    message "APPSETUP: generating database.php"
     level :info
   end
 
@@ -39,7 +39,7 @@ node[:deploy].each do |app_name, deploy|
   end
 
   log "message" do
-    message "SETUP: generating core.php"
+    message "APPSETUP: generating core.php"
     level :info
   end
 
@@ -60,9 +60,10 @@ node[:deploy].each do |app_name, deploy|
   end
 
   log "message" do
-    message "SETUP: creating tmp directory"
+    message "APPSETUP: creating tmp directory"
     level :info
   end
+
   directory "#{deploy[:deploy_to]}/current/app/tmp" do
     mode 0777
     group deploy[:group]
@@ -96,6 +97,11 @@ node[:deploy].each do |app_name, deploy|
       action :create
       recursive true
     end
+  end
+
+  Dir.foreach("#{deploy[:deploy_to]}/current/app/Plugin") do |item|
+    next if item == '.' or item == '..'
+      puts "#{item}"
   end
 
 end

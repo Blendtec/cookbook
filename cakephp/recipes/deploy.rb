@@ -113,6 +113,7 @@ node[:deploy].each do |app_name, deploy|
         user 'apache'
       end
       action :run
+      returns 1
     end
   end
 
@@ -126,6 +127,7 @@ node[:deploy].each do |app_name, deploy|
       user 'apache'
     end
     action :run
+    returns 1
   end
 end
 

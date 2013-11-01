@@ -8,7 +8,7 @@
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="5155e80f-5d55-4975-9b87-9a806c58ee58" time="1383268550004" ignored="false" />
     <file path="/default.rb" changelist="5155e80f-5d55-4975-9b87-9a806c58ee58" time="1383250203130" ignored="false" />
-    <file path="/appsetup.rb" changelist="5155e80f-5d55-4975-9b87-9a806c58ee58" time="1383274019534" ignored="false" />
+    <file path="/appsetup.rb" changelist="5155e80f-5d55-4975-9b87-9a806c58ee58" time="1383277058310" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -58,7 +58,7 @@
       <file leaf-file-name="appsetup.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/residential/recipes/appsetup.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="37" column="72" selection-start="989" selection-end="989" vertical-scroll-proportion="0.5050045">
+            <state line="36" column="99" selection-start="975" selection-end="975" vertical-scroll-proportion="0.49135578">
               <folding />
             </state>
           </provider>
@@ -403,7 +403,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/residential/recipes/appsetup.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="72" selection-start="989" selection-end="989" vertical-scroll-proportion="0.5050045">
+        <state line="36" column="99" selection-start="975" selection-end="975" vertical-scroll-proportion="0.49135578">
           <folding />
         </state>
       </provider>

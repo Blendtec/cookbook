@@ -48,4 +48,16 @@ node[:deploy].each do |app_name, deploy|
       File.directory?("#{deploy[:deploy_to]}/current/app/Config")
     end
   end
+
+  directory "#{deploy[:deploy_to]}/current/app/tmp" do
+    if platform?("ubuntu")
+      owner "www-data"
+      group "www-data"
+    elsif platform?("amazon")
+      owner "apache"
+      group "apache"
+    end
+    mode 0777
+    action :create
+  end
 end

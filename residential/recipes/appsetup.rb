@@ -75,10 +75,10 @@ node[:deploy].each do |app_name, deploy|
       owner "www-data"
     elsif platform?("amazon")
       owner "apache"
-    endcd ..
+    end
     group deploy[:group]
-    mode "0755"
-    action :create
+    mode 0755
+    action :touch
   end
 
   log "message" do

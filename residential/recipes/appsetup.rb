@@ -64,6 +64,23 @@ node[:deploy].each do |app_name, deploy|
     end
   end
 
+
+  log "message" do
+    message "APPSETUP: changing permissions to cake"
+    level :info
+  end
+
+  file "#{deploy[:deploy_to]}/current/lib/Cake/Console/cake" do
+    if platform?("ubuntu")
+      owner "www-data"
+    elsif platform?("amazon")
+      owner "apache"
+    endcd ..
+    group deploy[:group]
+    mode "0755"
+    action :create
+  end
+
   log "message" do
     message "APPSETUP: creating tmp directory"
     level :info

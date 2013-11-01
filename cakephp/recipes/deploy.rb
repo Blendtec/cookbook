@@ -102,7 +102,7 @@ node[:deploy].each do |app_name, deploy|
   end
 
   Dir.foreach("#{deploy[:deploy_to]}/current/app/Plugin") do |item|
-    next if item == '.' or item == '..'  or Dir["#{deploy[:deploy_to]}/current/app/Plugin/#{item}/Config/Migration"].nil
+    next if item == '.' or item == '..'  or Dir["#{deploy[:deploy_to]}/current/app/Plugin/#{item}/Config/Migration"].empty?
     execute 'cake migration' do
       cwd "#{deploy[:deploy_to]}/current/app"
       command "../lib/Cake/Console/cake Migrations.migration run all --plugin #{item}"

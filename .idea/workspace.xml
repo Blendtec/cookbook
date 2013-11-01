@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="5155e80f-5d55-4975-9b87-9a806c58ee58" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/residential/recipes/appsetup.rb" afterPath="$PROJECT_DIR$/residential/recipes/appsetup.rb" />
-    </list>
+    <list default="true" id="5155e80f-5d55-4975-9b87-9a806c58ee58" name="Default" comment="" />
     <ignored path="cookbook.iws" />
     <ignored path=".idea/workspace.xml" />
     <file path="/Dummy.txt" changelist="5155e80f-5d55-4975-9b87-9a806c58ee58" time="1383268550004" ignored="false" />

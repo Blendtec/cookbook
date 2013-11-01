@@ -2,8 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="5155e80f-5d55-4975-9b87-9a806c58ee58" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/residential/templates/defaults/core.php.erb" afterPath="$PROJECT_DIR$/residential/templates/default/core.php.erb" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/residential/templates/defaults/database.php.erb" afterPath="$PROJECT_DIR$/residential/templates/default/database.php.erb" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/residential/recipes/appsetup.rb" afterPath="$PROJECT_DIR$/residential/recipes/appsetup.rb" />
     </list>
     <ignored path="cookbook.iws" />
@@ -60,7 +58,7 @@
       <file leaf-file-name="appsetup.rb" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/residential/recipes/appsetup.rb">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="47" column="63" selection-start="1217" selection-end="1217" vertical-scroll-proportion="0.64149225">
+            <state line="47" column="63" selection-start="1204" selection-end="1204" vertical-scroll-proportion="0.64149225">
               <folding />
             </state>
           </provider>
@@ -405,7 +403,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/residential/recipes/appsetup.rb">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="47" column="63" selection-start="1217" selection-end="1217" vertical-scroll-proportion="0.64149225">
+        <state line="47" column="63" selection-start="1204" selection-end="1204" vertical-scroll-proportion="0.64149225">
           <folding />
         </state>
       </provider>

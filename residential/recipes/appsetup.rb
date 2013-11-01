@@ -29,7 +29,7 @@ node[:deploy].each do |app_name, deploy|
     )
 
     only_if do
-      File.directory?("#{deploy[:deploy_to]}/current/app/Config/database.php")
+      File.directory?("#{deploy[:deploy_to]}/current/app/Config")
     end
   end
 
@@ -45,7 +45,7 @@ node[:deploy].each do |app_name, deploy|
     end
 
     only_if do
-      File.directory?("#{deploy[:deploy_to]}/current/app/Config/core.php")
+      File.directory?("#{deploy[:deploy_to]}/current/app/Config")
     end
   end
 end

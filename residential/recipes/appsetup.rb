@@ -1,5 +1,10 @@
 node[:deploy].each do |app_name, deploy|
 
+  log "message" do
+    message "APPSETUP: installing composer"
+    level :info
+  end
+
   script "install_composer" do
     interpreter "bash"
     user "root"
@@ -74,6 +79,12 @@ node[:deploy].each do |app_name, deploy|
     end
     action :create
   end
+
+  log "message" do
+    message "APPSETUP: creating tmp/cache directory"
+    level :info
+  end
+
   directory "#{deploy[:deploy_to]}/current/app/tmp/cache" do
     mode 0777
     group deploy[:group]
@@ -83,6 +94,11 @@ node[:deploy].each do |app_name, deploy|
       owner "apache"
     end
     action :create
+  end
+
+  log "message" do
+    message "APPSETUP: creating tmp/cache/{models, persistent, views} directories"
+    level :info
   end
 
   %w{models persistent views}.each do |dir|
@@ -99,9 +115,17 @@ node[:deploy].each do |app_name, deploy|
     end
   end
 
+  log "message" do
+    message "APPSETUP: running migrations"
+    level :info
+  end
+
   Dir.foreach("#{deploy[:deploy_to]}/current/app/Plugin") do |item|
     next if item == '.' or item == '..'
-      puts "#{item}"
+    log "message" do
+      message "APPSETUP: I'm a BUS!!!"
+      level :info
+    end
   end
 
 end

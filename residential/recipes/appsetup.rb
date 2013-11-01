@@ -28,6 +28,9 @@ node[:deploy].each do |app_name, deploy|
         :db =>       (deploy[:database][:database] rescue nil)
     )
 
+    only_if do
+      File.directory?("#{deploy[:deploy_to]}/current/app/Config")
+    end
   end
 
   template "#{deploy[:deploy_to]}/current/app/Config/core.php" do
@@ -41,5 +44,8 @@ node[:deploy].each do |app_name, deploy|
       owner "apache"
     end
 
+    only_if do
+      File.directory?("#{deploy[:deploy_to]}/current/app/Config")
+    end
   end
 end

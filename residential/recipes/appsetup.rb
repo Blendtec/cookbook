@@ -123,7 +123,7 @@ node[:deploy].each do |app_name, deploy|
   Dir.foreach("#{deploy[:deploy_to]}/current/app/Plugin") do |item|
     next if item == '.' or item == '..'
     log "message" do
-      message "APPSETUP: I'm a BUS!!!"
+      message "APPSETUP: running migrations for #{item}"
       level :info
     end
   end

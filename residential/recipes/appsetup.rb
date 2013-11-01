@@ -1,10 +1,5 @@
 node[:deploy].each do |app_name, deploy|
 
-  log 'message' do
-    message "APPSETUP: installing composer"
-    level :info
-  end
-
   script "install_composer" do
     interpreter "bash"
     user 'root'
@@ -15,14 +10,9 @@ node[:deploy].each do |app_name, deploy|
     EOH
   end
 
-  log 'message' do
-    message "APPSETUP: generating database.php"
-    level :info
-  end
-
   template "#{deploy[:deploy_to]}/current/app/Config/database.php" do
     source 'database.php.erb'
-    mode 0660
+    mode 0440
     group deploy[:group]
 
     if platform?('ubuntu')
@@ -43,14 +33,9 @@ node[:deploy].each do |app_name, deploy|
     end
   end
 
-  log 'message' do
-    message 'APPSETUP: generating core.php'
-    level :info
-  end
-
   template "#{deploy[:deploy_to]}/current/app/Config/core.php" do
     source 'core.php.erb'
-    mode 0660
+    mode 0440
     group deploy[:group]
 
     if platform?('ubuntu')
@@ -64,12 +49,6 @@ node[:deploy].each do |app_name, deploy|
     end
   end
 
-
-  log 'message' do
-    message 'APPSETUP: changing permissions to cake'
-    level :info
-  end
-
   file "#{deploy[:deploy_to]}/current/lib/Cake/Console/cake" do
     if platform?('ubuntu')
       owner 'www-data'
@@ -77,17 +56,12 @@ node[:deploy].each do |app_name, deploy|
       owner 'apache'
     end
     group deploy[:group]
-    mode 0755
+    mode 0550
     action :touch
   end
 
-  log 'message' do
-    message 'APPSETUP: creating tmp directory'
-    level :info
-  end
-
   directory "#{deploy[:deploy_to]}/current/app/tmp" do
-    mode 0777
+    mode 0740
     group deploy[:group]
     if platform?('ubuntu')
       owner 'www-data'
@@ -95,15 +69,10 @@ node[:deploy].each do |app_name, deploy|
       owner 'apache'
     end
     action :create
-  end
-
-  log 'message' do
-    message 'APPSETUP: creating tmp/cache directory'
-    level :info
   end
 
   directory "#{deploy[:deploy_to]}/current/app/tmp/cache" do
-    mode 0777
+    mode 0740
     group deploy[:group]
     if platform?('ubuntu')
       owner 'www-data'
@@ -111,16 +80,11 @@ node[:deploy].each do |app_name, deploy|
       owner 'apache'
     end
     action :create
-  end
-
-  log 'message' do
-    message "APPSETUP: creating tmp/cache/{models, persistent, views} directories"
-    level :info
   end
 
   %w{models persistent views}.each do |dir|
     directory "#{deploy[:deploy_to]}/current/app/tmp/cache/#{dir}" do
-      mode 00777
+      mode 0740
       group deploy[:group]
       if platform?('ubuntu')
         owner 'www-data'
@@ -130,11 +94,6 @@ node[:deploy].each do |app_name, deploy|
       action :create
       recursive true
     end
-  end
-
-  log 'message' do
-    message "APPSETUP: running migrations"
-    level :info
   end
 
   Dir.foreach("#{deploy[:deploy_to]}/current/app/Plugin") do |item|
@@ -155,5 +114,4 @@ node[:deploy].each do |app_name, deploy|
       action :run
     end
   end
-
 end

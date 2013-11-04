@@ -80,16 +80,19 @@ node[:deploy].each do |app_name, deploy|
     action :create
   end
 
-  #set cache permissions, create if needed
-  directory "#{deploy[:deploy_to]}/current/app/tmp/cache" do
-    mode 0740
-    group deploy[:group]
-    if platform?('ubuntu')
-      owner 'www-data'
-    elsif platform?('amazon')
-      owner 'apache'
+  #create tmp subdirectories
+  %w{cache logs sessions tests}.each do |dir|
+    directory "#{deploy[:deploy_to]}/current/app/tmp/#{dir}" do
+      mode 0740
+      group deploy[:group]
+      if platform?('ubuntu')
+        owner 'www-data'
+      elsif platform?('amazon')
+        owner 'apache'
+      end
+      action :create
+      recursive true
     end
-    action :create
   end
 
   #create cache subdirectories

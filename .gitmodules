@@ -1,0 +1,3 @@
+[submodule "postfix"]
+	path = postfix
+	url = https://github.com/opscode-cookbooks/postfix.git

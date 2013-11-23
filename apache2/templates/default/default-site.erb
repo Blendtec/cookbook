@@ -1,12 +1,12 @@
 <VirtualHost *:80>
         ServerAdmin <%= node['apache']['contact'] %>
 
-        DocumentRoot /srv/www/
+        DocumentRoot /srv/www/app/webroot/
         <Directory />
                 Options FollowSymLinks
                 AllowOverride None
         </Directory>
-        <Directory /srv/www/>
+        <Directory /srv/www/app/webroot>
                 Options Indexes FollowSymLinks MultiViews
                 AllowOverride All
                 Order allow,deny

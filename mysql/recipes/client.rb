@@ -46,6 +46,10 @@ node['mysql']['client']['packages'].each do |mysql_pack|
   package mysql_pack do
     action :install
   end
+
+  log "a debug string" do
+    level :debug
+  end
 end
 
 if platform? 'windows'

@@ -129,7 +129,7 @@ node[:deploy].each do |app_name, deploy|
   end
 
   #if app has migrations run them
-  if File.directory?("#{deploy[:deploy_to]}/current/app/Config/migration")
+  if File.directory?("#{deploy[:deploy_to]}/current/app/Config/Migration")
     execute 'cake migration' do
       cwd "#{deploy[:deploy_to]}/current/app"
       command '../lib/Cake/Console/cake Migrations.migration run all'

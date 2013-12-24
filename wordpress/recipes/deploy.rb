@@ -26,15 +26,15 @@ template "#{deploy[:deploy_to]}/current/wp-config.php" do
       :db_user => (deploy[:database][:username] rescue nil),
       :db_password => (deploy[:database][:password] rescue nil),
       :db_host => (deploy[:database][:host] rescue nil),
-      :auth_key => deploy['wordpress']['keys']['auth'],
-      :secure_auth_key => deploy['wordpress']['keys']['secure_auth'],
-      :logged_in_key => deploy['wordpress']['keys']['logged_in'],
-      :nonce_key => deploy['wordpress']['keys']['nonce'],
-      :auth_salt => deploy['wordpress']['salt']['auth'],
-      :secure_auth_salt => deploy['wordpress']['salt']['secure_auth'],
-      :logged_in_salt => deploy['wordpress']['salt']['logged_in'],
-      :nonce_salt => deploy['wordpress']['salt']['nonce'],
-      :lang => deploy['wordpress']['languages']['lang']
+      :auth_key => node['wordpress']['keys']['auth'],
+      :secure_auth_key => node['wordpress']['keys']['secure_auth'],
+      :logged_in_key => node['wordpress']['keys']['logged_in'],
+      :nonce_key => node['wordpress']['keys']['nonce'],
+      :auth_salt => node['wordpress']['salt']['auth'],
+      :secure_auth_salt => node['wordpress']['salt']['secure_auth'],
+      :logged_in_salt => node['wordpress']['salt']['logged_in'],
+      :nonce_salt => node['wordpress']['salt']['nonce'],
+      :lang => node['wordpress']['languages']['lang']
   )
   action :create
 end

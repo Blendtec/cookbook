@@ -43,7 +43,9 @@ node[:deploy].each do |app_name, deploy|
         :secure_auth_salt => node['wordpress']['salt']['secure_auth'],
         :logged_in_salt => node['wordpress']['salt']['logged_in'],
         :nonce_salt => node['wordpress']['salt']['nonce'],
-        :lang => node['wordpress']['languages']['lang']
+        :lang => node['wordpress']['languages']['lang'],
+        :aws_key => node['wordpress']['aws']['key'],
+        :aws_secret_key => node['wordpress']['aws']['secret']
     )
     action :create
   end

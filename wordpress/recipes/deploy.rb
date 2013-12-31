@@ -20,7 +20,7 @@
 node[:deploy].each do |app_name, deploy|
 
   git "#{deploy[:deploy_to]}/shared/wp-content" do
-    repository 'https://github.com/Blendtec/cookbooks.git'
+    repository 'https://github.com/Blendtec/blog-content.git'
     reference 'master'
     enable_submodules true
     action :sync

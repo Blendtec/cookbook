@@ -28,6 +28,10 @@ node[:deploy].each do |app_name, deploy|
     group deploy[:group]
   end
 
+  directory "#{deploy[:deploy_to]}/shared/wp-content" do
+    mode 00775
+  end
+
   template "#{deploy[:deploy_to]}/current/wp-config.php" do
     source 'wp-config.php.erb'
     variables(
@@ -49,4 +53,6 @@ node[:deploy].each do |app_name, deploy|
     )
     action :create
   end
+
+
 end

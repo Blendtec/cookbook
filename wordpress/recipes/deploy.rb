@@ -30,6 +30,7 @@ node[:deploy].each do |app_name, deploy|
 
   directory "#{deploy[:deploy_to]}/shared/wp-content" do
     mode 00775
+    recursive true
   end
 
   template "#{deploy[:deploy_to]}/current/wp-config.php" do

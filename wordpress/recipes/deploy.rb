@@ -24,6 +24,8 @@ node[:deploy].each do |app_name, deploy|
     reference 'master'
     enable_submodules true
     action :sync
+    user deploy[:user]
+    group deploy[:group]
   end
 
   template "#{deploy[:deploy_to]}/current/wp-config.php" do

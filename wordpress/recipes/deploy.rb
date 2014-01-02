@@ -55,5 +55,7 @@ node[:deploy].each do |app_name, deploy|
     action :create
   end
 
-
+  file "#{deploy[:deploy_to]}/current/.htaccess" do
+    mode 00664
+  end
 end

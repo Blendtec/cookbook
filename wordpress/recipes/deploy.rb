@@ -53,6 +53,8 @@ node[:deploy].each do |app_name, deploy|
         :aws_secret_key => node['wordpress']['aws']['secret']
     )
     action :create
+    user deploy[:user]
+    group deploy[:group]
   end
 
   file "#{deploy[:deploy_to]}/current/.htaccess" do

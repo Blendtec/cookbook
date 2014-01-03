@@ -60,6 +60,7 @@ node[:deploy].each do |app_name, deploy|
   #Temporary until uploads are migrated fully to S3
   source_path = "https://s3.amazonaws.com/blog.blendtec.com/uploads.tar.gz"
   install_path = "#{deploy[:deploy_to]}/shared/wp-content/uploads.tar.gz"
+  check_file = "#{deploy[:deploy_to]}/shared/wp-content/uploads/README.txt"
 
   remote_file install_path do
     source source_path
@@ -70,9 +71,9 @@ node[:deploy].each do |app_name, deploy|
   bash "extract-uploads-archive" do
     cwd "#{deploy[:deploy_to]}/shared/wp-content/"
     code <<-EOF
-    tar -xvf uploads.tar.gz
+    tar -xvf uploads.tar
     EOF
-    not_if { ::File.exists?(install_path) }
+    not_if { ::File.exists?(check_file) }
   end
 
   directory "#{deploy[:deploy_to]}/shared/wp-content" do

@@ -17,3 +17,7 @@ tmp
 .yardoc
 _yardoc
 doc/
+
+#ide specific
+.idea/compiler.xml
+.idea/copyright/

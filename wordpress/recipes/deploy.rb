@@ -30,6 +30,9 @@ node[:deploy].each do |app_name, deploy|
 
   template "#{deploy[:deploy_to]}/current/wp-config.php" do
     source 'wp-config.php.erb'
+    user deploy[:user]
+    group deploy[:group]
+    mode 00755
     variables(
         :db_name => (deploy[:database][:database] rescue nil),
         :db_user => (deploy[:database][:username] rescue nil),
@@ -48,8 +51,6 @@ node[:deploy].each do |app_name, deploy|
         :aws_secret_key => node['wordpress']['aws']['secret']
     )
     action :create
-    user deploy[:user]
-    group deploy[:group]
   end
 
   file "#{deploy[:deploy_to]}/current/.htaccess" do

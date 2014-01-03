@@ -7,7 +7,7 @@ node[:deploy].each do |app_name, deploy|
     block do
       rc = Chef::Util::FileEdit.new("#{node[:apache][:dir]}/sites-available/#{application_name}.conf")
       proxy_line = "YAY"
-      rc.insert_line_after_match ^.*\DocumentRoot\b.*$, proxy_line
+      rc.insert_line_after_match(/^.*\DocumentRoot\b.*$/, proxy_line)
       rc.write_file
     end
     only_if do

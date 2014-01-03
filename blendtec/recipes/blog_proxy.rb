@@ -4,6 +4,7 @@ node[:deploy].each do |app_name, deploy|
 
   #Add proxypass entry for blog
   ruby_block "add proxypass blog entry" do
+    Chef::Log.info("modifying #{node[:apache][:dir]}/sites-available/#{application_name}.conf")
     block do
       rc = Chef::Util::FileEdit.new("#{node[:apache][:dir]}/sites-available/#{application_name}.conf")
       proxy_line = "YAY"

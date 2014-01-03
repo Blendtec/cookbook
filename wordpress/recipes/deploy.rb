@@ -70,7 +70,7 @@ node[:deploy].each do |app_name, deploy|
   bash "extract-uploads-archive" do
     cwd "#{deploy[:deploy_to]}/shared/wp-content/"
     code <<-EOF
-    tar -jxvf uploads.tar.gz
+    tar -xvf uploads.tar.gz
     EOF
     not_if { ::File.exists?(install_path) }
   end

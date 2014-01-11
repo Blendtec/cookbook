@@ -30,8 +30,8 @@ node[:deploy].each do |app_name, deploy|
 
   template "#{deploy[:deploy_to]}/current/wp-config.php" do
     source 'wp-config.php.erb'
-    user deploy[:user]
-    group deploy[:group]
+    user 'deploy'
+    group 'www-data'
     mode 00755
     variables(
         :db_name => (deploy[:database][:database] rescue nil),
@@ -57,26 +57,7 @@ node[:deploy].each do |app_name, deploy|
     mode 00664
   end
 
-  #Temporary until uploads are migrated fully to S3
-  source_path = "https://s3.amazonaws.com/blog.blendtec.com/uploads.tar.gz"
-  install_path = "#{deploy[:deploy_to]}/shared/wp-content/uploads.tar.gz"
-  check_file = "#{deploy[:deploy_to]}/shared/wp-content/uploads/README.txt"
-
-  remote_file install_path do
-    source source_path
-    mode "0775"
-    not_if { ::File.exists?(install_path) }
-  end
-
-  bash "extract-uploads-archive" do
-    cwd "#{deploy[:deploy_to]}/shared/wp-content/"
-    code <<-EOF
-    tar -xvf uploads.tar.gz
-    EOF
-    not_if { ::File.exists?(check_file) }
-  end
-
-  directory "#{deploy[:deploy_to]}/shared/wp-content" do
+  directory "#{deploy[:deploy_to]}/current/wp-content" do
     mode 00775
     recursive true
   end

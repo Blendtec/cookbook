@@ -79,15 +79,8 @@ node[:deploy].each do |app_name, deploy|
   end
 
   directory "#{deploy[:deploy_to]}/current/wp-content" do
-    mode 00755
-    recursive true
-  end
-
-  file "#{deploy[:deploy_to]}/current/wp-content/plugins/w3tc-wp-loader.php" do
     mode 00775
-    only_if do
-      ::File.exists?("#{deploy[:deploy_to]}/current/wp-content/plugins/w3tc-wp-loader.php")
-    end
+    recursive true
   end
 
   file "#{deploy[:deploy_to]}/current/.htaccess" do

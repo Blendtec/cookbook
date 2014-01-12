@@ -89,6 +89,11 @@ node[:deploy].each do |app_name, deploy|
     recursive true
   end
 
+  directory "#{deploy[:deploy_to]}/current/wp-content/plugins" do
+    mode 00775
+    recursive true
+  end
+
   directory "#{deploy[:deploy_to]}/current/wp-content/cache" do
     mode 00775
     recursive true

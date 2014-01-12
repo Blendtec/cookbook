@@ -78,24 +78,24 @@ node[:deploy].each do |app_name, deploy|
     action :create
   end
 
-  file "#{deploy[:deploy_to]}/current/.htaccess" do
-    mode 00664
-  end
-
   directory "#{deploy[:deploy_to]}/current/wp-content" do
     mode 00755
-    user 'www-data'
-    group 'www-data'
     recursive true
   end
 
-  directory "#{deploy[:deploy_to]}/current/wp-content/plugins" do
+  file "#{deploy[:deploy_to]}/current/wp-content/plugins/w3tc-wp-loader.php" do
     mode 00775
-    recursive true
+    only_if do
+      ::File.exists?("#{deploy[:deploy_to]}/current/wp-content/plugins/w3tc-wp-loader.php")
+    end
   end
 
-  directory "#{deploy[:deploy_to]}/current/wp-content/cache" do
-    mode 00775
-    recursive true
+  file "#{deploy[:deploy_to]}/current/.htaccess" do
+    mode 00664
+    only_if do
+      ::File.exists?("#{deploy[:deploy_to]}/current/.htaccess")
+    end
   end
+
+
 end

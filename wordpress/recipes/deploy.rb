@@ -84,15 +84,13 @@ node[:deploy].each do |app_name, deploy|
 
   directory "#{deploy[:deploy_to]}/current/wp-content" do
     mode 00755
-    user deploy[:user]
-    group deploy[:group]
+    user 'www-data'
+    group 'www-data'
     recursive true
   end
 
   directory "#{deploy[:deploy_to]}/current/wp-content/cache" do
     mode 00775
-    user deploy[:user]
-    group deploy[:group]
     recursive true
   end
 end

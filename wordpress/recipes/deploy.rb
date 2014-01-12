@@ -53,6 +53,31 @@ node[:deploy].each do |app_name, deploy|
     action :create
   end
 
+  template "#{deploy[:deploy_to]}/current/wp-content/w3tc-config/master.php" do
+    source 'master.php.erb'
+    user 'deploy'
+    group 'www-data'
+    mode 00755
+    variables(
+        :db_name => (deploy[:database][:database] rescue nil),
+        :db_user => (deploy[:database][:username] rescue nil),
+        :db_password => (deploy[:database][:password] rescue nil),
+        :db_host => (deploy[:database][:host] rescue nil),
+        :auth_key => node['wordpress']['keys']['auth'],
+        :secure_auth_key => node['wordpress']['keys']['secure_auth'],
+        :logged_in_key => node['wordpress']['keys']['logged_in'],
+        :nonce_key => node['wordpress']['keys']['nonce'],
+        :auth_salt => node['wordpress']['salt']['auth'],
+        :secure_auth_salt => node['wordpress']['salt']['secure_auth'],
+        :logged_in_salt => node['wordpress']['salt']['logged_in'],
+        :nonce_salt => node['wordpress']['salt']['nonce'],
+        :lang => node['wordpress']['languages']['lang'],
+        :aws_key => node['wordpress']['aws']['key'],
+        :aws_secret_key => node['wordpress']['aws']['secret']
+    )
+    action :create
+  end
+
   file "#{deploy[:deploy_to]}/current/.htaccess" do
     mode 00664
   end

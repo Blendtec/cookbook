@@ -52,7 +52,7 @@ node[:deploy].each do |app_name, deploy|
     end
 
     variables(
-        :debug => (node['core']['debug'] rescue 0),
+        :debug => (app_name['core']['debug'] rescue 0),
     )
 
     only_if do

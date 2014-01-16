@@ -51,6 +51,10 @@ node[:deploy].each do |app_name, deploy|
       owner 'apache'
     end
 
+    variables(
+        :debug => (node['core']['debug'] rescue 0),
+    )
+
     only_if do
       File.directory?("#{deploy[:deploy_to]}/current/app/Config")
     end

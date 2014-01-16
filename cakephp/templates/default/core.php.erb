@@ -185,7 +185,10 @@ define('LOG_ERROR', LOG_ERR);
   *
   */
   Configure::write('Session', array(
-  'defaults' => 'php'
+  'defaults' => 'database',
+    'handler' => array(
+        'model'=>'session'
+    )
   ));
 
   /**

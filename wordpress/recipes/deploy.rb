@@ -91,7 +91,7 @@ node[:deploy].each do |app_name, deploy|
   end
 
   file "#{deploy[:deploy_to]}/current/.htaccess" do
-    mode 00664
+    mode 00644
     only_if do
       ::File.exists?("#{deploy[:deploy_to]}/current/.htaccess")
     end

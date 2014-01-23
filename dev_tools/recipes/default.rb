@@ -65,8 +65,8 @@ script 'phpunit' do
   user 'root'
   cwd '/home/vagrant/'
   code <<-EOH
-    pear channel-discover pear.phpunit.de
-    pear install phpunit/PHPUnit
+    pear config-set auto_discover 1
+    pear install pear.phpunit.de/PHPUnit
   EOH
 end
 

@@ -44,4 +44,20 @@ when "mac_os_x"
   end
 else
   package "git"
+
+  #git config
+  template "/home/vagrant/.gitconfig" do
+    source '.gitconfig.erb'
+    group 'vagrant'
+    owner 'vagrant'
+    variables(
+        :name  => (node['git']['name'] rescue nil),
+        :email => (node['git']['email'] rescue nil),
+        :push  => (node['git']['push'] rescue nil)
+    )
+
+    only_if do
+      File.directory?("#{deploy[:deploy_to]}/current/app/Config")
+    end
+  end
 end

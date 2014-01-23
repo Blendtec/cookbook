@@ -1,20 +1,7 @@
-#checkout Arcanist
-git "/home/vagrant/arcanist" do
-  user 'vagrant'
-  group 'vagrant'
-  repository 'https://github.com/facebook/arcanist.git'
-  reference "master"
-  action :sync
-end
-
-#checkout LibPHUtil
-git "/home/vagrant/libphutil" do
-  user 'vagrant'
-  group 'vagrant'
-  repository 'https://github.com/facebook/libphutil.git'
-  reference "master"
-  action :sync
-end
+include_recipe 'dev_tools::libphutil'
+include_recipe 'dev_tools::arcanist'
+include_recipe 'dev_tools::pear_phpcs'
+include_recipe 'dev_tools::pearphpunit'
 
 #Copy CakePhpTestEngine into Arc
 template "/home/vagrant/arcanist/src/unit/engine/CakePhpTestEngine.php" do
@@ -24,10 +11,6 @@ template "/home/vagrant/arcanist/src/unit/engine/CakePhpTestEngine.php" do
   only_if do
     File.directory?("/home/vagrant/arcanist")
   end
-end
-
-log "running /home/vagrant/libphutil/scripts/build_xhpast.sh" do
-  level :debug
 end
 
 #Build xh_past
@@ -49,34 +32,3 @@ script 'arc_liberate' do
   EOH
 end
 
-#Add arcanist to path
-script 'arc_path' do
-  interpreter 'bash'
-  user 'vagrant'
-  cwd '/home/vagrant/'
-  code <<-EOH
-    echo "PATH=\"$PATH:/home/vagrant/arcanist/bin/\"" >> .profile
-  EOH
-end
-
-#Install PHPUnit
-script 'phpunit' do
-  interpreter 'bash'
-  user 'root'
-  cwd '/home/vagrant/'
-  code <<-EOH
-    pear config-set auto_discover 1
-    pear install pear.phpunit.de/PHPUnit
-  EOH
-end
-
-#Install CakePHP code sniffer
-script 'cakephp_codesniffer' do
-  interpreter 'bash'
-  user 'root'
-  cwd '/home/vagrant/'
-  code <<-EOH
-    pear channel-discover pear.cakephp.org
-    pear install cakephp/CakePHP_CodeSniffer
-  EOH
-end

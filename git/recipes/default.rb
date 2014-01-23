@@ -55,9 +55,5 @@ else
         :email => (node['git']['email'] rescue nil),
         :push  => (node['git']['push'] rescue nil)
     )
-
-    only_if do
-      File.directory?("#{deploy[:deploy_to]}/current/app/Config")
-    end
   end
 end

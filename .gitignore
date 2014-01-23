@@ -18,4 +18,8 @@ tmp
 _yardoc
 doc/
 
-*.DS_Store
+#ide specific
+.idea/compiler.xml
+.idea/copyright/
+
+.DS_Store

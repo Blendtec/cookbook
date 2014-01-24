@@ -1,7 +1,7 @@
 include_recipe 'dev_tools::libphutil'
 include_recipe 'dev_tools::arcanist'
 include_recipe 'dev_tools::pear_phpcs'
-include_recipe 'dev_tools::pearphpunit'
+include_recipe 'dev_tools::pear_phpunit'
 
 #checkout project
 git "/srv/www" do

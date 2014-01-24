@@ -10,7 +10,7 @@ git "/srv/www" do
   repository 'git@github.com:Blendtec/residential.git'
   reference "master"
   enable_submodules true
-  revision develop
+  revision 'develop'
   action :sync
 end
 
